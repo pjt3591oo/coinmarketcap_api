@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const { getBalance, getTotalSuppluy, getExcepts } = require('../../utils/eth')
+const { getBalance, getTotalSuppluy } = require('../../utils/eth')
+const Excepts = require('../../models/excepts')
 
 const sum = arr => {
   let sum = 0
@@ -9,32 +10,48 @@ const sum = arr => {
   return sum
 }
 
+// 유통량 조회
 router.get('/', async (req, res, next) => {
   let totalSupply = await getTotalSuppluy()
-  let excepts = getExcepts()
+  let ets = Excepts.findAll()
 
   let temp = []
 
-  for (let i in excepts) {
-    temp.push(getBalance(excepts[i]))
+  for (let i in ets) {
+    temp.push(getBalance(ets[i]))
   }
 
   temp = await Promise.all(temp)
-  let min = totalSupply - sum(temp)
+  let result = totalSupply - sum(temp)
 
-  console.log(totalSupply)
-  console.log(temp)
-  console.log(min)
-
-  return res.send(min.toString())
+  return res.send(result.toString())
 });
 
 router.post('/', (req, res, next) => {
-  return res.status(201).send(123456)
+  let { address } = req.body
+  let isAdd = Excepts.add(address)
+  let msg = ''
+  
+  if (isAdd) msg = "success"
+  else msg = "fail"
+  
+  return res.status(201).send(msg)
 })
 
 router.delete('/', (req, res, next) => {
-  return res.status(201).send(123456)
+  let { address } = req.body
+  let isRemove = Excepts.remove(address)
+  let msg = ''
+  
+  if (isRemove) msg = "success"
+  else msg = "fail"
+  
+  return res.status(201).send(msg)
+})
+
+router.get('/excepts', (req, res, next) => {
+  let ets = Excepts.findAll()
+  return res.status(200).send(ets.join('\n'))
 })
 
 module.exports = router;
