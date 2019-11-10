@@ -1,5 +1,7 @@
 # coinmarketcap 제공용 API
 
+ERC20으로 제작된 토큰 유통량을 coinmarketcap에 제공하기 위한 API
+
 ### 의존성 모듈 설치 및 실행
 
 * 의존성 모듈 설치
