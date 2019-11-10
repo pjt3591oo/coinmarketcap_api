@@ -16,7 +16,7 @@ const getBalance = async address => {
   })
 }
 
-const getTotalSuppluy = async () => {
+const getTotalSupply = async () => {
   totalSupply = totalSupply || await tokenContract.methods.totalSupply().call()
 
   return parseFloat(web3.utils.fromWei(totalSupply, 'ether'))
@@ -26,5 +26,5 @@ const getTotalSuppluy = async () => {
 module.exports = { 
   tokenContract,
   getBalance,
-  getTotalSuppluy
+  getTotalSupply
 }

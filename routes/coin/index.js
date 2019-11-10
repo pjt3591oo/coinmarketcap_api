@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getBalance, getTotalSuppluy } = require('../../utils/eth')
+const { getBalance, getTotalSupply } = require('../../utils/eth')
 const Excepts = require('../../models/excepts')
 
 const sum = arr => {
@@ -12,7 +12,7 @@ const sum = arr => {
 
 // 유통량 조회
 router.get('/', async (req, res, next) => {
-  let totalSupply = await getTotalSuppluy()
+  let totalSupply = await getTotalSupply()
   let ets = Excepts.findAll()
 
   let temp = []
@@ -32,10 +32,8 @@ router.post('/', (req, res, next) => {
   let isAdd = Excepts.add(address)
   let msg = ''
   
-  if (isAdd) msg = "success"
-  else msg = "fail"
-  
-  return res.status(201).send(msg)
+  if (isAdd) { msg = "success"; return res.status(201).send(msg) }
+  else { msg = "fail"; return res.status(200).send(msg) }
 })
 
 router.delete('/', (req, res, next) => {
