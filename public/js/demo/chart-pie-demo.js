@@ -14,8 +14,8 @@ var myPieChart = new Chart(ctx, {
     labels: ["Main Holder", "Another Holder"],
     datasets: [{
       data: [parseFloat(mainHolderValue), parseFloat(anotherHolderValue)],
-      backgroundColor: ['#9C8510', '#1cc88a'],
-      hoverBackgroundColor: ['#7C5520', '#17a673'],
+      backgroundColor: ['#1cc88a', '#f6c23e'],
+      hoverBackgroundColor: ['#2cb87a', '#e6b22e'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },

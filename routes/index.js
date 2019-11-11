@@ -3,6 +3,7 @@ var router = express.Router();
 
 const { getBalance, getTotalSupply } = require('../utils/eth')
 const Excepts = require('../models/excepts')
+const tokenInfo = require('../config/info.json')
 
 let coin = require('./coin')
 
@@ -14,9 +15,9 @@ const sum = arr => {
 
 router.get('/admin', async (req, res) => {
   let totalSupply = await getTotalSupply()
-  
   let excepts = Excepts.findAll()
-
+  console.log(tokenInfo)
+  console.log(tokenInfo.TOKEN_ADDRESS)
   let balances = []
 
   for (let i in excepts) {
@@ -31,6 +32,7 @@ router.get('/admin', async (req, res) => {
     excepts,
     balances,
     mainHolderSum,
+    tokenAddress: tokenInfo.TOKEN_ADDRESS,
     percent: (totalSupply - mainHolderSum) / totalSupply * 100
   })
 })

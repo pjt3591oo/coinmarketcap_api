@@ -49,7 +49,7 @@ ERC20은 채굴 개념이 아니기 때문에 총 발행량만큼 이미 발행 
 
 ```json
 {
-  "TOEKN_ADDRESS": "0x4dd672e77c795844fe34a43ef8e20fa1e617c8fb",
+  "TOKEN_ADDRESS": "0x4dd672e77c795844fe34a43ef8e20fa1e617c8fb",
   "NODE_IP": "https://mainnet.infura.io"
 }
 ```
